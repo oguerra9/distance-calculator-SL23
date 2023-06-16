@@ -66,7 +66,7 @@ function resetForm() {
 }
 
 function displayDistance() {
-    distDisplayEl.textContent = `Distance = ${distance} km`;
+    distDisplayEl.textContent = `Distance = ${Math.round(distance*100)/100} km`;
 }
 
 async function initMap() {
