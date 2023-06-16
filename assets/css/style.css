@@ -1,19 +1,14 @@
+header {
+    background-color: rgb(140,180,252);
+    padding: 5px;
+}
+
 .formItem {
     display: flex;
-    /* justify-content: space-between; */
     margin-bottom: 3px;
 }
 
 #map {
-    height: 400px; /* The height is 400 pixels */
-    width: 100%; /* The width is the width of the web page */
-    border-style: solid;
-    border-width: 3px;
-    border-color: aqua;
-}
-
-#coordFormCon {
-    border-style: solid;
-    border-width: 3px;
-    border-color: red;
+    height: 600px;
+    width: 100%;
 }

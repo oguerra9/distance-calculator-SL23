@@ -34,9 +34,6 @@ function submitCoords(event) {
     pointBCoords.lat = pointBLatIn.value;
     pointBCoords.lon = pointBLonIn.value;
 
-    console.log(pointACoords);
-    console.log(pointBCoords);
-
     resetForm();
     distance = calculateDistance();
     displayDistance();
