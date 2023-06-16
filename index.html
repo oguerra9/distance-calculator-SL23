@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Distance Calculator</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.css" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1>Distance Calculator</h1>
+            </header>
+            <div id="coordFormCon" class="col-4">
+                <form id="coordForm">
+                    <h2>Point A</h2>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="pointALat" class="form-label col-3">Latitude</label>
+                        <input type="text" class="form-control col-9" id="pointALat">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="pointALon" class="form-label col-3">Longitude</label>
+                        <input type="text" class="form-control col-9" id="pointALon">
+                    </div>
+                    <h2>Point B</h2>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="pointBLat" class="form-label col-3">Latitude</label>
+                        <input type="text" class="form-control col-9" id="pointBLat">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="pointBLon" class="form-label col-3">Longitude</label>
+                        <input type="text" class="form-control col-9" id="pointBLon">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div id="distanceDisplay"></div>
+        </div>
+        <script src="assets/js/script.js"></script>
+    </body>
+</html>
