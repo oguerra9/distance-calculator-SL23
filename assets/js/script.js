@@ -116,6 +116,7 @@ async function showPoints() {
 
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    const { Marker } = await google.maps.importLibrary("marker");
 
     map = new Map(document.getElementById("map"), {
         zoom: 4,
@@ -124,19 +125,43 @@ async function showPoints() {
         mapId: "coordinatesMap",
     });
 
-    const markerA = new AdvancedMarkerElement({
+    // const markerA = new AdvancedMarkerElement({
+    //     map: map,
+    //     position: pointA,
+    //     title: "Point A",
+    // });
+
+    const markerA = new Marker({
         map: map,
         position: pointA,
         title: "Point A",
+        label: "A"
     });
 
     map.panTo(pointA);
 
-    const markerB = new AdvancedMarkerElement({
+    // const markerB = new AdvancedMarkerElement({
+    //     map: map,
+    //     position: pointB,
+    //     title: "Point B",
+    // });
+
+    const markerB = new Marker({
         map: map,
         position: pointB,
         title: "Point B",
+        label: "B"
     });
 
     map.panTo(pointB);
+
+    const coordPath = new google.maps.Polyline({
+        path: [pointA, pointB],
+        geodesic: true,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+    });
+
+    coordPath.setMap(map);
 }
