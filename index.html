@@ -15,31 +15,37 @@
             </header>
             <div id="coordFormCon" class="col-4">
                 <form id="coordForm">
-                    <h2>Point A</h2>
-                    <div class="mb-3 d-flex justify-content-between">
+                    <h3>Point A</h3>
+                    <!-- <div class="mb-3 d-flex justify-content-between">
+                        <label for="pointALat" class="form-label col-3">Latitude</label>
+                        <input type="text" class="form-control col-9" id="pointALat">
+                    </div> -->
+                    <div class="formItem">
                         <label for="pointALat" class="form-label col-3">Latitude</label>
                         <input type="text" class="form-control col-9" id="pointALat">
                     </div>
-                    <div class="mb-3 d-flex justify-content-between">
+                    <div class="formItem">
                         <label for="pointALon" class="form-label col-3">Longitude</label>
                         <input type="text" class="form-control col-9" id="pointALon">
                     </div>
-                    <h2>Point B</h2>
-                    <div class="mb-3 d-flex justify-content-between">
+                    <h3>Point B</h3>
+                    <div class="formItem">
                         <label for="pointBLat" class="form-label col-3">Latitude</label>
                         <input type="text" class="form-control col-9" id="pointBLat">
                     </div>
-                    <div class="mb-3 d-flex justify-content-between">
+                    <div class="formItem">
                         <label for="pointBLon" class="form-label col-3">Longitude</label>
                         <input type="text" class="form-control col-9" id="pointBLon">
                     </div>
-                    <div>
+                    <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
             <div id="distanceDisplay"></div>
         </div>
+        <span id="mapDisplay"></span>
+
         <script src="assets/js/script.js"></script>
     </body>
 </html>
