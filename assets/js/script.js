@@ -6,6 +6,8 @@ var pointBLonIn = document.getElementById('pointBLon');
 
 var distDisplayEl = document.getElementById('distanceDisplay');
 
+let map;
+
 var pointACoords = {
     lat: '',
     lon: ''
@@ -19,6 +21,8 @@ var pointBCoords = {
 var distance = 0.0;
 
 initMap();
+
+
 
 function submitCoords(event) {
 
@@ -51,8 +55,6 @@ function calculateDistance() {
 
     var calcDist = (Math.acos( (Math.sin(latA) * Math.sin(latB)) + (Math.cos(latA) * Math.cos(latB) * Math.cos(lonB-lonA))) * earthRadius);
 
-    console.log(calcDist);
-
     return calcDist;
 }
 
@@ -64,19 +66,11 @@ function resetForm() {
     pointBLonIn.value = '';
 
     distDisplayEl.textContent = '';
-
 }
 
 function displayDistance() {
-    distDisplayEl.textContent = `Distance from Point A to Point B = ${distance} km`;
+    distDisplayEl.textContent = `Distance = ${distance} km`;
 }
-
-coordFormEl.addEventListener('submit', submitCoords);
-
-
-
-// Initialize and add the map
-let map;
 
 async function initMap() {
     console.log('calling init map');
@@ -88,27 +82,12 @@ async function initMap() {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
     map = new Map(document.getElementById("map"), {
-        zoom: 4,
-        //center: positionA,
+        zoom: 2,
         center: { lat: 36.549387, lng: -7.885140 },
         mapId: "coordinatesMap",
     });
 
-    // const markerA = new AdvancedMarkerElement({
-    //     map: map,
-    //     position: positionA,
-    //     title: "Point A",
-    // });
-
-    // const markerB = new AdvancedMarkerElement({
-    //     map: map,
-    //     position: positionB,
-    //     title: "Point B",
-    // });
-
-  console.log('reached end of init map');
 }
-
 
 async function showPoints() {
     const pointA = { lat: parseFloat(pointACoords.lat), lng: parseFloat(pointACoords.lon) };
@@ -117,44 +96,37 @@ async function showPoints() {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     const { Marker } = await google.maps.importLibrary("marker");
+    const {LatLngBounds} = await google.maps.importLibrary("core");
+    //var bounds = await google.maps.LatLngBounds();
+    var bounds = new LatLngBounds();
 
     map = new Map(document.getElementById("map"), {
-        zoom: 4,
-        //center: positionA,
-        center: pointA,
+        zoom: 2,
+        center: { lat: 36.549387, lng: -7.885140 },
         mapId: "coordinatesMap",
     });
 
-    // const markerA = new AdvancedMarkerElement({
-    //     map: map,
-    //     position: pointA,
-    //     title: "Point A",
-    // });
-
     const markerA = new Marker({
-        map: map,
         position: pointA,
         title: "Point A",
         label: "A"
     });
 
-    map.panTo(pointA);
-
-    // const markerB = new AdvancedMarkerElement({
-    //     map: map,
-    //     position: pointB,
-    //     title: "Point B",
-    // });
-
     const markerB = new Marker({
-        map: map,
         position: pointB,
         title: "Point B",
         label: "B"
     });
 
-    map.panTo(pointB);
-
+    markerA.setMap(map);
+    markerB.setMap(map);
+    
+    map.panTo(pointA);
+    bounds.extend(pointA);
+    bounds.extend(pointB);
+    map.fitBounds(bounds);   
+    
+    
     const coordPath = new google.maps.Polyline({
         path: [pointA, pointB],
         geodesic: true,
@@ -164,4 +136,8 @@ async function showPoints() {
     });
 
     coordPath.setMap(map);
+    
+    map.setZoom(map.getZoom() - 1);
 }
+
+coordFormEl.addEventListener('submit', submitCoords);
