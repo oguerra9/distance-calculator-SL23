@@ -1,14 +1,15 @@
 var coordFormEl = document.getElementById('coordForm');
-var pointALatIn = document.getElementById('pointALat');
-var pointALonIn = document.getElementById('pointALon');
-var pointBLatIn = document.getElementById('pointBLat');
-var pointBLonIn = document.getElementById('pointBLon');
+var pointAIn = document.getElementById('pointACoords');
+var pointBIn = document.getElementById('pointBCoords');
 var distDisplayEl = document.getElementById('distanceDisplay');
 
 let map;
 let markerA;
 let markerB;
 let coordPath;
+
+var pointAString = '';
+var pointBString = '';
 
 var pointACoords = {
     lat: '',
@@ -29,15 +30,34 @@ function submitCoords(event) {
 
     event.preventDefault();
 
-    pointACoords.lat = pointALatIn.value;
-    pointACoords.lon = pointALonIn.value;
-    pointBCoords.lat = pointBLatIn.value;
-    pointBCoords.lon = pointBLonIn.value;
+    pointAString = pointAIn.value;
+    pointBString = pointBIn.value;
 
+
+    // pointACoords.lat = pointALatIn.value;
+    // pointACoords.lon = pointALonIn.value;
+    // pointBCoords.lat = pointBLatIn.value;
+    // pointBCoords.lon = pointBLonIn.value;
+
+    retrieveCoords();
     resetForm();
     distance = calculateDistance();
     displayDistance();
     showPoints();
+}
+
+function retrieveCoords() {
+    let pointACommaIn = pointAString.indexOf(',');
+    let pointBCommaIn = pointBString.indexOf(',');
+
+    pointACoords.lat = pointAString.substring(0,pointACommaIn);
+    pointACoords.lon = pointAString.substring((pointACommaIn + 1), (pointAString.length + 1));
+
+    pointBCoords.lat = pointBString.substring(0,pointBCommaIn);
+    pointBCoords.lon = pointBString.substring((pointBCommaIn + 1), (pointBString.length + 1));
+
+    console.log(pointACoords);
+    console.log(pointBCoords);
 }
 
 function calculateDistance() {
@@ -57,10 +77,8 @@ function calculateDistance() {
 
 function resetForm() {
 
-    pointALatIn.value = '';
-    pointALonIn.value = '';
-    pointBLatIn.value = '';
-    pointBLonIn.value = '';
+    pointAIn.value = '';
+    pointBIn.value = '';
 
     distDisplayEl.textContent = '';
 }
